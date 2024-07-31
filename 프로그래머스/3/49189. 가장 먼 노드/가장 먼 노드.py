@@ -1,6 +1,6 @@
 def solution(n, edge):
     ans = 0
-    graph = [[] for i in range(n+1)]
+    graph = [[] for _ in range(n+1)]
     queue = [1]
     visited = [False] * (n + 1)
     visited[1] = True
