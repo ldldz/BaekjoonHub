@@ -10,7 +10,7 @@ function solution(n, k) {
     const ans = [];
     let arr = Array.from({ length: n }, (_, i) => i + 1);
     
-    for (let i = n - 1; i > 0; i--) {
+    for (let i = n - 1; i >= 0; i--) {
         const f = facto(i);
         const j = Math.ceil(k / f) || arr.length;
         ans.push(arr[j - 1]);
@@ -18,5 +18,5 @@ function solution(n, k) {
         arr = arr.filter((v) => v !== arr[j - 1]);
     }
     
-    return [...ans, arr[0]];
+    return ans;
 }
