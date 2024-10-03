@@ -1,7 +1,8 @@
-function solution(k, ranges) {
-    const w = [k];
-    while (w.at(-1) !== 1) w.push(w.at(-1) % 2 ? 3 * w.at(-1) + 1 : w.at(-1) / 2);
-    const area = w.map((y, i) => i ? Math.min(w[i - 1], y) + Math.abs(w[i - 1] - y) / 2 : 0);
-    return ranges.map(([a, b]) => [a + 1, w.length + b])
-        .map(([a, b]) => b < a ? -1 : area.slice(a, b).reduce((c, d) => c + d, 0));
-}
+const getW = k => k === 1 ? [1] : [k, ...getW(k % 2 ? 3 * k + 1 : k / 2)];
+const getArea = w => w.slice(1).map((y, i) => (w[i] + y) / 2);
+const getSum = (area, a, b) => b < a ? -1 : area.slice(a, b).reduce((c, d) => c + d, 0);
+const solution = (k, ranges) => {
+    const w = getW(k);
+    const area = getArea(w);
+    return ranges.map(([a, b]) => getSum(area, a, w.length + b - 1));
+};
